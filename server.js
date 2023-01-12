@@ -12,9 +12,15 @@ const PORT=8000
 app.use(express.json());
 
 app.use((req, res, next) => {
+  
   res.header('Access-Control-Allow-Headers', 'Content-Type');
   next();
 });
+app.use(cors({
+  origin:'http://localhost:3000', 
+  credentials:true,           
+  optionSuccessStatus:200
+}))
 
 //Here is the APi of the different routing
 app.use('/api',TeacherRoute)

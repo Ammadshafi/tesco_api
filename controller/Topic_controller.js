@@ -18,7 +18,7 @@ exports.create_topics = async (req, res) => {
       return res.status(201).json({ success: false, msg: response });
     }
   } catch (error) {
-   return res.status(500).send(error);
+   return console.log(error);
   }
 };
 
@@ -38,6 +38,15 @@ exports.get_all_topics=async(req,res)=>{
         return res.status(500).send(error);
     }
 
+}
+exports.get_one_topic= async(req,res)=>{
+  try{
+      const topic=await TopicsModel.findOne({_id:req.params.id})
+      res.status(200).json({message:'Data fetch succesfully',success:true,data:topic})
+  }
+  catch(err){
+      res.status(500).send(err)
+  }
 }
 exports.delete_topics=async(req,res)=>{
     try {
